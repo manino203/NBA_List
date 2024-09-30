@@ -1,6 +1,5 @@
 package com.example.nba_list.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -71,7 +70,6 @@ fun PlayerListScreen(
 
     LaunchedEffect(Unit) {
         vm.collectChanges()
-        Log.d("loadPlayersVm", "wat?")
         vm.loadPlayers()
     }
 
@@ -116,32 +114,24 @@ private fun PlayerListScreenContent(
         }
     }
 
-    LaunchedEffect(uiState.loading) {
-        Log.d("loading", "${uiState.loading}")
-    }
-
     var canLoadMore by remember {
         mutableStateOf(true)
     }
 
-    LaunchedEffect(uiState.loading) {
+
+    LaunchedEffect(listState) {
         snapshotFlow { uiState.loading }
             .filter { !it }
             .take(1)
             .collect {
                 canLoadMore = true
             }
-    }
 
-    LaunchedEffect(listState) {
         snapshotFlow{ listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index }
-            .collect { lastVisibleIndex ->
-                if ((lastVisibleIndex == listState.layoutInfo.totalItemsCount - 1) && canLoadMore) {
+            .filter { (it == listState.layoutInfo.totalItemsCount - 1) && canLoadMore }
+            .collect {
                     canLoadMore = false
-                    Log.d("loadMore", "${uiState.loading}")
                     actionLoadMore()
-
-                }
             }
     }
 

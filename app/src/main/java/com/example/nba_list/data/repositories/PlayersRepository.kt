@@ -1,6 +1,5 @@
 package com.example.nba_list.data.repositories
 
-import android.util.Log
 import com.example.nba_list.data.models.Player
 import com.example.nba_list.data.network.ApiService
 import com.example.nba_list.data.network.HttpErrorException
@@ -32,8 +31,7 @@ class PlayersRepositoryImpl(
 
 
     override suspend fun loadPlayers() {
-        Log.d("loadPlayers", "$cursor")
-        delay(1000L)
+        delay(3000L)
         service.getPlayers(cursor, pageSize).also{ response ->
             if (response.isSuccessful){
                 response.body()?.let { body ->
