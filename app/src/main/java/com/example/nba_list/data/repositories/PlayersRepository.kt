@@ -5,7 +5,6 @@ import com.example.nba_list.data.network.ApiService
 import com.example.nba_list.data.network.HttpErrorException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.update
 
 interface PlayersRepository {
     suspend fun loadPlayers(): Flow<List<Player>>
