@@ -1,10 +1,7 @@
 package com.example.nba_list.data.repositories
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.nba_list.data.models.Player
-import com.example.nba_list.data.models.Team
 import com.example.nba_list.data.network.ApiService
 import com.example.nba_list.data.network.HttpErrorException
 import kotlinx.coroutines.delay
@@ -12,7 +9,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import java.lang.Thread.State
 
 interface PlayersRepository{
 

@@ -1,8 +1,5 @@
 package com.example.nba_list.vm
 
-import androidx.annotation.StringRes
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nba_list.R
@@ -19,9 +16,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.io.IOException
-import java.net.ConnectException
-import java.net.MalformedURLException
-import java.net.UnknownHostException
 
 
 data class PlayerListUiState(
