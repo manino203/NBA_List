@@ -3,6 +3,8 @@ package com.example.nba_list.ui.composables
 import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -73,11 +77,12 @@ private fun PlayerSheetContent(
     player: Player,
 ) {
     var teamInfoVisible by remember { mutableStateOf(false) }
-
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
+            .verticalScroll(scrollState)
     ) {
 
         Header("${player.firstName} ${player.lastName}")

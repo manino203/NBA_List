@@ -37,9 +37,13 @@ class PlayerListViewModel(
         _uiState.update{
             it.copy(loading = true)
         }
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try{
-                playersRepo.loadPlayers()
+                playersRepo.loadPlayers().collect{ players->
+                    _uiState.update {
+                        it.copy(players = it.players + players)
+                    }
+                }
             }catch (e: Exception){
                 _uiState.update{
                     it.copy(error = handleError(e))
@@ -47,16 +51,6 @@ class PlayerListViewModel(
             }
             _uiState.update{
                 it.copy(loading = false)
-            }
-        }
-    }
-
-    fun collectChanges(){
-        viewModelScope.launch(Dispatchers.Main) {
-            playersRepo.players.collectLatest{
-                _uiState.update{ state ->
-                    state.copy(players = it)
-                }
             }
         }
     }

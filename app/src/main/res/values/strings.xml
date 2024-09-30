@@ -29,7 +29,7 @@
     <string name="server_error">Something went wrong on the server. Please try again later.</string>
     <string name="not_authorized_error">You are not authorized to perform this action. Please log in and try again.</string>
     <string name="permission_error">You do not have permission to access this resource.</string>
-    <string name="too_many_requests_error">This service is currently unavailable. Please try again in a few minutes.</string>
+    <string name="too_many_requests_error">You\'ve sent too many request in a short period please wait a while before retrying.</string>
     <string name="bad_request_error">Bad request error.</string>
     <string name="request_cancelled_error">The request was canceled. Please try again.</string>
     <string name="unexpected_response_error">Received an unexpected response from the server. Please try again later.</string>

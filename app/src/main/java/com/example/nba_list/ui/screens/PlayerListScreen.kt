@@ -27,7 +27,6 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,6 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.nba_list.R
 import com.example.nba_list.data.models.Player
 import com.example.nba_list.data.models.Team
@@ -50,15 +50,14 @@ import com.example.nba_list.vm.PlayerListUiState
 import com.example.nba_list.vm.PlayerListViewModel
 import com.example.nba_list.vm.TopBarViewModel
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.take
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun PlayerListScreen(
     topBarViewModel: TopBarViewModel,
+    vm: PlayerListViewModel = koinViewModel()
 ) {
-    val vm: PlayerListViewModel = koinViewModel()
-    val uiState = vm.uiState.collectAsState()
+    val uiState = vm.uiState.collectAsStateWithLifecycle()
     val title = stringResource(id = R.string.app_name)
     LaunchedEffect(title) {
         topBarViewModel.setTitle(title)
@@ -69,13 +68,12 @@ fun PlayerListScreen(
     }
 
     LaunchedEffect(Unit) {
-        vm.collectChanges()
         vm.loadPlayers()
     }
 
     PlayerListScreenContent(
         uiState = uiState.value,
-        {
+        clearError = {
             vm.clearError()
         }
     ) {
@@ -119,16 +117,17 @@ private fun PlayerListScreenContent(
     }
 
 
-    LaunchedEffect(listState) {
-        snapshotFlow { uiState.loading }
-            .filter { !it }
-            .take(1)
-            .collect {
-                canLoadMore = true
-            }
+    LaunchedEffect(uiState.loading) {
+        if (!uiState.loading){
+            canLoadMore = true
+        }
+    }
 
+    LaunchedEffect(listState) {
         snapshotFlow{ listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index }
-            .filter { (it == listState.layoutInfo.totalItemsCount - 1) && canLoadMore }
+            .filter {
+                (it == listState.layoutInfo.totalItemsCount - 1) && canLoadMore
+            }
             .collect {
                     canLoadMore = false
                     actionLoadMore()
@@ -136,6 +135,7 @@ private fun PlayerListScreenContent(
     }
 
     Scaffold(
+        Modifier.fillMaxSize(),
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ){ padding ->
         if(uiState.players.isEmpty() && !uiState.loading) {
@@ -159,7 +159,8 @@ private fun PlayerListScreenContent(
             }
         }else{
             LazyColumn(
-                modifier = Modifier.padding(padding),
+                modifier = Modifier
+                    .padding(padding),
                 state = listState,
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 contentPadding = PaddingValues(8.dp)
