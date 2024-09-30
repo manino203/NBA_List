@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">NBA List</string>
+
+    <string name="retry">Retry</string>
+    <string name="player_image">Player Image</string>
+    <string name="expand_collapse">Expand/Collapse</string>
+
+
+
+    <string name="position">Position</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="jersey_number">Jersey Number</string>
+    <string name="college">College</string>
+    <string name="country">Country</string>
+    <string name="draft_year">Draft Year</string>
+    <string name="draft_round">Draft Round</string>
+    <string name="draft_number">Draft Number</string>
+    <string name="team">Team</string>
+    <string name="conference">Conference</string>
+    <string name="division">Division</string>
+    <string name="city">City</string>
+    <string name="abbreviation">Abbreviation</string>
+    <string name="full_name">Full Name</string>
+
+    <string name="internet_error">No internet connection. Please check your network settings and try again.</string>
+    <string name="generic_error">Something went wrong</string>
+    <string name="resource_not_found_error">The requested resource was not found</string>
+    <string name="server_error">Something went wrong on the server. Please try again later.</string>
+    <string name="not_authorized_error">You are not authorized to perform this action. Please log in and try again.</string>
+    <string name="permission_error">You do not have permission to access this resource.</string>
+    <string name="too_many_requests_error">This service is currently unavailable. Please try again in a few minutes.</string>
+    <string name="bad_request_error">Bad request error.</string>
+    <string name="request_cancelled_error">The request was canceled. Please try again.</string>
+    <string name="unexpected_response_error">Received an unexpected response from the server. Please try again later.</string>
+
+
+
+
+
+
+
+
+
+
+</resources>
