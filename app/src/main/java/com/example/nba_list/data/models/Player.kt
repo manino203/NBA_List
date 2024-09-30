@@ -2,6 +2,9 @@ package com.example.nba_list.data.models
 
 import com.google.gson.annotations.SerializedName
 
+/**
+* Data class representing a basketball player.
+*/
 data class Player(
     val id: Int,
     @SerializedName("first_name")

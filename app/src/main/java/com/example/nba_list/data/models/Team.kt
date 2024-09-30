@@ -2,6 +2,9 @@ package com.example.nba_list.data.models
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Data class representing a basketball team.
+ */
 data class Team(
     @SerializedName("abbreviation")
     val abbreviation: String,

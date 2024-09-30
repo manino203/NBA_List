@@ -16,12 +16,27 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 
 
+/**
+ * Data class representing the UI state for the player list screen.
+ *
+ * @param loading Indicates whether data is currently being loaded.
+ * @param players A list of [Player] objects representing the players.
+ * @param error An optional resource ID representing an error message.
+ */
 data class PlayerListUiState(
     val loading: Boolean = false,
     val players: List<Player> = emptyList(),
     val error: Int? = null
 )
 
+/**
+ * ViewModel for managing player data in the Player List screen.
+ *
+ * This ViewModel handles loading player data from the repository,
+ * managing loading states, and providing the UI with player data.
+ *
+ * @param playersRepo The repository responsible for fetching player data.
+ */
 class PlayerListViewModel(
     private val playersRepo: PlayersRepository
 ): ViewModel() {
@@ -30,6 +45,12 @@ class PlayerListViewModel(
     val uiState: StateFlow<PlayerListUiState>
         get() = _uiState.asStateFlow()
 
+    /**
+     * Loads the list of players from the repository.
+     *
+     * This function updates the loading state and collects player data from the repository,
+     * updating the UI state with the loaded players or any encountered errors.
+     */
     fun loadPlayers(){
 
         _uiState.update{
@@ -46,19 +67,29 @@ class PlayerListViewModel(
                 _uiState.update{
                     it.copy(error = handleError(e))
                 }
-            }
-            _uiState.update{
-                it.copy(loading = false)
+            }finally {
+                _uiState.update {
+                    it.copy(loading = false)
+                }
             }
         }
     }
 
+    /**
+     * Clears any error messages in the UI state.
+     */
     fun clearError(){
         _uiState.update {
             it.copy(error = null)
         }
     }
 
+    /**
+     * Handles errors that occur during data loading.
+     *
+     * @param e The exception that occurred.
+     * @return A resource ID representing the error message.
+     */
     private fun handleError(e: Exception): Int {
         return when (e){
             is HttpErrorException ->
