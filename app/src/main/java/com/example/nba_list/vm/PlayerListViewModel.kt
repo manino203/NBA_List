@@ -1,5 +1,6 @@
 package com.example.nba_list.vm
 
+import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nba_list.R
@@ -23,6 +24,7 @@ import java.io.IOException
  * @param players A list of [Player] objects representing the players.
  * @param error An optional resource ID representing an error message.
  */
+@Immutable
 data class PlayerListUiState(
     val loading: Boolean = false,
     val players: List<Player> = emptyList(),

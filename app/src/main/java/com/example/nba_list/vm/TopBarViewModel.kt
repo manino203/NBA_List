@@ -1,5 +1,6 @@
 package com.example.nba_list.vm
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModel
  * @param loading Indicates whether to display progress bar.
  * @param title The title displayed in the top bar.
  */
+@Immutable
 data class TopBarUiState(
     val loading: Boolean = false,
     val title: String = ""
