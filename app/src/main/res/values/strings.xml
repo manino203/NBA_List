@@ -31,6 +31,9 @@
     <string name="permission_error">You do not have permission to access this resource.</string>
     <string name="too_many_requests_error">You\'ve sent too many request in a short period please wait a while before retrying.</string>
     <string name="bad_request_error">Bad request error.</string>
+    <string name="service_unavailable_error">Service Unavailable — We\'re temporarily offline for maintenance. Please try again later.</string>
+    <string name="rate_limited_error">Too Many Requests — You\'re rate limited.</string>
+    <string name="not_acceptable_error">Not Acceptable — You requested a format that isn\'t json.</string>
     <string name="request_cancelled_error">The request was canceled. Please try again.</string>
     <string name="unexpected_response_error">Received an unexpected response from the server. Please try again later.</string>
 

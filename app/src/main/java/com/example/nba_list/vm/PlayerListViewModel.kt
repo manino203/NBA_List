@@ -97,8 +97,11 @@ class PlayerListViewModel(
                     400 -> R.string.bad_request_error
                     401 -> R.string.not_authorized_error
                     404 -> R.string.resource_not_found_error
+                    406 -> R.string.not_acceptable_error
+                    429 -> R.string.rate_limited_error
                     500 -> R.string.server_error
                     502 -> R.string.too_many_requests_error
+                    503 -> R.string.service_unavailable_error
                     else -> R.string.generic_error
                 }
             is IOException -> R.string.internet_error
